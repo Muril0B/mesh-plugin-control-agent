@@ -9,6 +9,6 @@
     "license": "MIT"
   },
   "files": {
-    "plugin.js": "https://raw.githubusercontent.com/Muril0B/mesh-plugin-control-agent/refs/heads/main/config.json?token=GHSAT0AAAAAADPCAK7SPAJ2QEVGNEKTHBD22ITXDVQ"
+    "plugin.js": "https://raw.githubusercontent.com/Muril0B/mesh-plugin-control-agent/refs/heads/main/config.json"
   }
 }
