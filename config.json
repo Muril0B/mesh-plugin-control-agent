@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "author": "MB Desenvolvimento e Tecnologia",
     "description": "Plugin para ativar e desativar agentes diretamente pelo painel MeshCentral.",
-    "homepage": "https://github.com/MB-Desenvolvimento/mesh-plugin-control-agent",
+    "homepage": "https://github.com/murilomb/mesh-plugin-control-agent",
     "license": "MIT"
   },
   "files": {
