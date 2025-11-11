@@ -1,15 +1,15 @@
 //
 // ControlAgent Plugin - MB Desenvolvimento e Tecnologia
-// Versão 2.0 — Controle individual e em massa dos agentes
+// Versão 2.1 — Controle individual e em massa com confirmação
 //
 
 module.exports = {
   name: "ControlAgent",
-  version: "2.0.0",
-  description: "Ativa ou desativa agentes individualmente ou em massa no MeshCentral.",
+  version: "2.1.0",
+  description: "Ativa ou desativa agentes individualmente ou em massa no MeshCentral, com confirmação de ação.",
 
   startup: function (server, args) {
-    console.log("🟢 [PLUGIN] ControlAgent v2.0 iniciado com sucesso!");
+    console.log("🟢 [PLUGIN] ControlAgent v2.1 iniciado com sucesso!");
 
     // --- ENDPOINT PRINCIPAL ---
     server.express.get("/plugin/controlagent/:action/:id?", function (req, res) {
@@ -17,7 +17,7 @@ module.exports = {
 
       if (!action) return res.status(400).send("Parâmetro 'action' obrigatório.");
 
-      // Se vier sem ID, é ação em massa
+      // Ação em massa
       if (!id) {
         const allDevices = Object.keys(server.devices || {});
         allDevices.forEach((devId) => {
@@ -50,7 +50,7 @@ module.exports = {
       return res.status(400).send("Ação inválida");
     });
 
-    // --- INTERFACE INDIVIDUAL (dentro da página do dispositivo) ---
+    // --- INTERFACE INDIVIDUAL ---
     server.webserver.on("devicePageExtraTabs", (req, res, render) => {
       render.push({
         title: "Control Agent",
@@ -95,24 +95,28 @@ module.exports = {
       });
     });
 
-    // --- INTERFACE EM MASSA (página My Devices) ---
+    // --- INTERFACE EM MASSA ---
     server.webserver.on("serverStatsExtraHtml", (req, res, render) => {
       render.push(`
         <div style="padding:10px;text-align:center;">
           <h3>Controle em Massa dos Agentes</h3>
-          <button onclick="massAction('enable')" style="background:#4CAF50;color:white;padding:8px 12px;border:none;border-radius:5px;margin:5px;">🟢 Ativar Todos</button>
-          <button onclick="massAction('disable')" style="background:#f44336;color:white;padding:8px 12px;border:none;border-radius:5px;margin:5px;">🔴 Desativar Todos</button>
+          <button onclick="confirmMassAction('enable')" style="background:#4CAF50;color:white;padding:8px 12px;border:none;border-radius:5px;margin:5px;">🟢 Ativar Todos</button>
+          <button onclick="confirmMassAction('disable')" style="background:#f44336;color:white;padding:8px 12px;border:none;border-radius:5px;margin:5px;">🔴 Desativar Todos</button>
           <div id="massResult" style="margin-top:10px;font-weight:bold;color:#333;"></div>
         </div>
 
         <script>
-          async function massAction(action) {
+          async function confirmMassAction(action) {
+            const actionName = action === 'enable' ? 'ativar' : 'desativar';
+            const ok = confirm('⚠️ Tem certeza que deseja ' + actionName + ' todos os agentes?');
+            if (!ok) return;
+
             try {
               const res = await fetch('/plugin/controlagent/' + action);
               const data = await res.json();
               document.getElementById('massResult').innerText =
                 (action === 'enable' ? '🟢 ' : '🔴 ') +
-                'Ação "' + action + '" aplicada a ' + data.count + ' agentes.';
+                'Ação "' + actionName + '" aplicada a ' + data.count + ' agentes.';
             } catch {
               alert('Erro ao executar ação em massa.');
             }
@@ -121,6 +125,6 @@ module.exports = {
       `);
     });
 
-    console.log("🔧 [PLUGIN] Interface em massa habilitada com sucesso!");
+    console.log("🔧 [PLUGIN] Interface em massa com confirmação habilitada!");
   }
 };
