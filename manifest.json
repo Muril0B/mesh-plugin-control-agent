@@ -1,0 +1,13 @@
+{
+  "name": "ControlAgent",
+  "version": "1.0.0",
+  "author": "MB Desenvolvimento e Tecnologia",
+  "description": "Permite ativar e desativar agentes diretamente pelo painel MeshCentral.",
+  "homepage": "https://muril0b.github.io/mesh-plugin-control-agent/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Muril0B/mesh-plugin-control-agent.git"
+  },
+  "downloadUrl": "https://muril0b.github.io/mesh-plugin-control-agent/config.json",
+  "license": "MIT"
+}
