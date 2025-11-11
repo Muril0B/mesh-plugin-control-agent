@@ -4,11 +4,11 @@
     "title": "Control Agent",
     "version": "1.0.0",
     "author": "MB Desenvolvimento e Tecnologia",
-    "description": "Plugin para ativar e desativar agentes remotamente via painel MeshCentral.",
-    "homepage": "http://meshteste.mbhost.com.br:8080/plugins/control-agent/",
+    "description": "Plugin para ativar e desativar agentes diretamente pelo painel MeshCentral.",
+    "homepage": "https://github.com/MB-Desenvolvimento/mesh-plugin-control-agent",
     "license": "MIT"
   },
   "files": {
-    "plugin.js": "http://meshteste.mbhost.com.br:8080/plugins/control-agent/plugin.js"
+    "plugin.js": "https://raw.githubusercontent.com/MB-Desenvolvimento/mesh-plugin-control-agent/main/plugin.js"
   }
 }
