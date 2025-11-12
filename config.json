@@ -1,7 +1,7 @@
 {
   "plugin": {
     "name": "ControlAgent",
-    "title": "Control Agent",
+    "title": "ControlAgent",
     "version": "1.0.0",
     "author": "MB Desenvolvimento e Tecnologia",
     "description": "Permite ativar e desativar agentes diretamente pelo painel MeshCentral."
